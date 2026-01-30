@@ -1,0 +1,12 @@
+FROM python:3.9
+
+WORKDIR /app
+
+# Install numpy
+RUN pip install --no-cache-dir numpy
+
+# Copy Python script into container
+COPY cloud_compute_cost_batch.py .
+
+# Run Python script on container start
+CMD ["python", "cloud_compute_cost_batch.py"]
