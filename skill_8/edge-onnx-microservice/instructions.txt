@@ -1,0 +1,40 @@
+🚀 Edge AI ONNX Microservice - Setup Instructions
+
+Prerequisites:
+- Docker installed and running
+- Python 3.10+ (if you want to run locally or generate a dummy model)
+
+---
+
+Step 1: Unzip the project
+Extract the files into a folder.
+
+Step 2: Generate or Place your ONNX Model
+The microservice REQUIRES a file named 'model.onnx' in the root directory.
+If you don't have one, you can generate a dummy testing model by running:
+    pip install torch onnx
+    python generate_dummy_model.py
+
+Step 3: Build the Docker Image
+Inside the project folder, run:
+    docker build -t edge-onnx-service .
+
+Step 4: Run the Container
+Start the API on port 8000:
+    docker run -d --name onnx-service -p 8000:8000 edge-onnx-service
+
+Step 5: Access the Interfaces
+- 🎨 Custom Visual UI: http://localhost:8000/ui (Premium Dashboard)
+- 📖 API Documentation: http://localhost:8000/api-docs (Swagger UI)
+- 📑 Alternative Docs: http://localhost:8000/redoc (Redoc)
+
+Step 6: Test Prediction (Optional - APIs)
+Using PowerShell:
+    Invoke-RestMethod -Uri "http://localhost:8000/predict" -Method Post -ContentType "application/json" -Body '{"data": [1.0, 2.0, 3.0, 4.0]}'
+
+Using curl:
+    curl -X POST "http://localhost:8000/predict" -H "Content-Type: application/json" -d "{\"data\": [1.0, 2.0, 3.0, 4.0]}"
+
+How to Stop:
+    docker stop onnx-service
+    docker rm onnx-service

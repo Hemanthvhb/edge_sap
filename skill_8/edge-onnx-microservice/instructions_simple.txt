@@ -1,0 +1,27 @@
+🚀 Edge AI ONNX Microservice - Quick Start Guide
+
+Prerequisites:
+- Install Docker Desktop: https://www.docker.com/products/docker-desktop/
+
+---
+
+1. Build the Microservice
+Open your terminal in this folder and run:
+   docker build -t edge-onnx-service .
+
+2. Run the Container
+Start the service on port 8000:
+   docker run -d --name onnx-service -p 8000:8000 edge-onnx-service
+
+3. Use the Service
+- 🎨 Premium UI: http://localhost:8000/ui (Use this to test predictions)
+- 📖 API Docs: http://localhost:8000/api-docs (For developers)
+
+4. Test via Terminal (Optional)
+PowerShell:
+  Invoke-RestMethod -Uri "http://localhost:8000/predict" -Method Post -ContentType "application/json" -Body '{"data": [1.0, 2.0, 3.0, 4.0]}'
+
+5. Stop the Service
+When you are done, run:
+   docker stop onnx-service
+   docker rm onnx-service
